@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   name: { type: String, required: true },
   userImg: { type: String, required: true },
-  notes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Note' }],
+  notes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Doc' }],
   isOnboard: { type: Boolean, default: false },
 });
 

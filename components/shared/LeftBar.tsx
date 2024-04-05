@@ -10,6 +10,8 @@ import Logo from './Logo';
 import { ElementRef, useRef, useState } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 import MenuItems from './MenuItems';
+import { CiCirclePlus } from 'react-icons/ci';
+import Item from './Item';
 
 const LeftBar = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -25,7 +27,7 @@ const LeftBar = () => {
           <ChevronsLeft className="h-6 w-6" />
         </div>
         <div className="flex w-full flex-1 flex-col gap-6 px-6">
-          <MenuItems />
+          {/* <MenuItems /> */}
           {/* {sidebarLinks.map((link) => {
             const isActive =
               (pathName.includes(link.route) && link.route.length > 1) ||
@@ -48,7 +50,11 @@ const LeftBar = () => {
             );
           })} */}
         </div>
-        <div className="mt-4">Documents</div>
+        <div className="mt-4">
+          <Link href="/new-note">
+            <Item onClick={() => {}} label="New Page" icon={CiCirclePlus} />
+          </Link>
+        </div>
         <div className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0" />
 
         <div className="mt-10 px-6 py-6">
