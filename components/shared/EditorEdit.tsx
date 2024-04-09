@@ -1,4 +1,8 @@
-import { fetchNoteById, updateNote } from '@/lib/actions/note.actions';
+import {
+  fetchNoteById,
+  updateNote,
+  deleteNoteById,
+} from '@/lib/actions/note.actions';
 import { Block, BlockNoteEditor, PartialBlock } from '@blocknote/core';
 import '@blocknote/core/fonts/inter.css';
 import { BlockNoteView } from '@blocknote/react';
@@ -20,7 +24,9 @@ async function uploadFile(file: File) {
     'tmpfiles.org/dl/'
   );
 }
-
+async function deleteFromMongoDB(noteId: string | string[]) {
+  await deleteNoteById(noteId);
+}
 async function updateEditorsContentToMongoDB(
   jsonBlocks: Block[],
   noteId: string | string[]
@@ -90,6 +96,18 @@ export default function EditorEdit({ noteId }: { noteId: string | string[] }) {
         >
           Save
         </Button>
+
+        <div className="flex items-center justify-center mt-5">
+          <Button
+            onClick={() => {
+              deleteFromMongoDB(noteId);
+              localStorage.removeItem('editorContent');
+            }}
+            className="mt-5 bg-red-600"
+          >
+            Delete
+          </Button>
+        </div>
       </Link>
     </div>
   );

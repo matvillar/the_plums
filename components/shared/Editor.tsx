@@ -122,6 +122,9 @@ export default function Editor({
         >
           Save
         </Button>
+        <div className="flex items-center justify-center mt-5">
+          <Button className="mt-5 bg-red-600">Cancel</Button>
+        </div>
       </Link>
     </div>
   );

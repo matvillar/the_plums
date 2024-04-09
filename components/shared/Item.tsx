@@ -22,9 +22,9 @@ const Item = ({
     <div
       onClick={onClick}
       role="button"
-      style={{ paddingLeft: layer ? `${layer * 10 + 10}px` : '10px' }}
+      style={{ paddingLeft: '10px' }}
       className={cn(
-        'group min-h-[25px] text-sm py-1 pr-3 w-full hover:bg-primary/5 flex items-center font-medium',
+        'group min-h-[25px] text-sm py-1 pr-5 w-full hover:bg-primary/5 flex items-center font-medium',
         isActive && 'bg-primary/5 text-primary'
       )}
     >
@@ -37,14 +37,14 @@ const Item = ({
         </div>
       )}
       {docIcon ? (
-        <div className="mr-2 shrink-0 text-lg" onClick={() => {}}>
+        <div className="mr-2 shrink-0 text-2xl" onClick={() => {}}>
           {docIcon}
         </div>
       ) : (
         <Icon className="shrink-0 h-5 mr-3" size={28} />
       )}
 
-      <span className="truncate">{label}</span>
+      <span className="hidden md:block">{label}</span>
     </div>
   );
 };

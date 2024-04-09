@@ -74,3 +74,22 @@ export async function updateNote({
     throw new Error('Error updating note');
   }
 }
+
+export async function deleteNoteById(noteId: string | string[]) {
+  try {
+    connect();
+    const note = await Note.findById(noteId).exec();
+    if (!note) {
+      throw new Error('Note not found');
+    }
+    await Note.findByIdAndDelete(noteId).exec();
+    await Folder.findByIdAndUpdate(note.parentFolder, {
+      $pull: {
+        notes: noteId,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error deleting note');
+  }
+}
