@@ -7,7 +7,7 @@ import { SignOutButton, SignedIn } from '@clerk/clerk-react';
 import { RiLogoutBoxLine } from 'react-icons/ri';
 import { ChevronsLeft, MenuIcon } from 'lucide-react';
 import Logo from './Logo';
-import { ElementRef, useRef, useState } from 'react';
+
 import { useMediaQuery } from 'usehooks-ts';
 
 import { FaPlusCircle } from 'react-icons/fa';

@@ -1,19 +1,11 @@
-import { NoteEditorProps } from '@/constants/NoteEditorProps';
 import { createNote } from '@/lib/actions/note.actions';
 import { Block, BlockNoteEditor, PartialBlock } from '@blocknote/core';
 import '@blocknote/core/fonts/inter.css';
-import {
-  BlockNoteView,
-  BlockTypeSelect,
-  FormattingToolbar,
-  FormattingToolbarController,
-  ImageCaptionButton,
-  ReplaceImageButton,
-  useCreateBlockNote,
-} from '@blocknote/react';
+import { BlockNoteView } from '@blocknote/react';
 import '@blocknote/react/style.css';
 import { use, useEffect, useMemo, useState } from 'react';
 import { Button } from '../ui/button';
+import Link from 'next/link';
 
 async function uploadFile(file: File) {
   const body = new FormData();
@@ -74,7 +66,33 @@ export default function Editor({
     if (initialContent === 'loading') {
       return undefined;
     }
-    return BlockNoteEditor.create({ initialContent, uploadFile });
+
+    return BlockNoteEditor.create({
+      initialContent: [
+        {
+          type: 'heading',
+          content: 'Welcome to PlumsApp!',
+        },
+        {
+          type: 'paragraph',
+        },
+        {
+          type: 'paragraph',
+          content: 'This is a note editor. You can write notes here!',
+        },
+        {
+          type: 'paragraph',
+        },
+        {
+          type: 'paragraph',
+          content: 'Upload an image using the button below',
+        },
+        {
+          type: 'image',
+        },
+      ],
+      uploadFile,
+    });
   }, [initialContent]);
 
   if (editor === undefined) {
@@ -82,41 +100,45 @@ export default function Editor({
   }
 
   return (
-    <div className="wrapper border border-gray-300">
-      <BlockNoteView
-        editor={editor}
-        theme={'light'}
-        onChange={() => {
-          saveToStorage(editor.document);
-        }}
-      />
-      {/* Save on click to Mongodb */}
-      <Button
-        onClick={() => {
-          saveEditorsContentToMongoDB(editor.document, folderId);
-          // clear local storage
-          localStorage.removeItem('editorContent');
-        }}
-      >
-        Save
-      </Button>
+    <div className="flex flex-col mt-4">
+      <div className="wrapper border border-gray-300">
+        <BlockNoteView
+          editor={editor}
+          theme={'light'}
+          onChange={() => {
+            saveToStorage(editor.document);
+          }}
+        />
+      </div>
+      <Link href="/home">
+        <Button
+          className="w-full mt-5"
+          onClick={() => {
+            saveEditorsContentToMongoDB(editor.document, folderId);
+            // clear local storage
+            localStorage.removeItem('editorContent');
+          }}
+        >
+          Save
+        </Button>
+      </Link>
     </div>
   );
 }
 
 // const editor: BlockNoteEditor = useCreateBlockNote({
 //   initialContent: [
-//     {
-//       type: 'paragraph',
-//       content: 'Welcome to this demo!',
-//     },
-//     {
-//       type: 'paragraph',
-//       content: 'Upload an image using the button below',
-//     },
-//     {
-//       type: 'image',
-//     },
+// {
+//   type: 'paragraph',
+//   content: 'Welcome to this demo!',
+// },
+// {
+//   type: 'paragraph',
+//   content: 'Upload an image using the button below',
+// },
+// {
+//   type: 'image',
+// },
 //   ],
 //   uploadFile,
 // });

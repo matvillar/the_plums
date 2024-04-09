@@ -1,23 +1,11 @@
-import { NoteEditorProps } from '@/constants/NoteEditorProps';
-import {
-  createNote,
-  fetchNoteById,
-  updateNote,
-} from '@/lib/actions/note.actions';
+import { fetchNoteById, updateNote } from '@/lib/actions/note.actions';
 import { Block, BlockNoteEditor, PartialBlock } from '@blocknote/core';
 import '@blocknote/core/fonts/inter.css';
-import {
-  BlockNoteView,
-  BlockTypeSelect,
-  FormattingToolbar,
-  FormattingToolbarController,
-  ImageCaptionButton,
-  ReplaceImageButton,
-  useCreateBlockNote,
-} from '@blocknote/react';
+import { BlockNoteView } from '@blocknote/react';
 import '@blocknote/react/style.css';
 import { use, useEffect, useMemo, useState } from 'react';
 import { Button } from '../ui/button';
+import Link from 'next/link';
 
 async function uploadFile(file: File) {
   const body = new FormData();
@@ -91,16 +79,18 @@ export default function EditorEdit({ noteId }: { noteId: string | string[] }) {
           }}
         />
       </div>
-      <Button
-        className="mt-5"
-        onClick={() => {
-          updateEditorsContentToMongoDB(editor.document, noteId);
-          // clear local storage
-          localStorage.removeItem('editorContent');
-        }}
-      >
-        Save
-      </Button>
+      <Link href="/home">
+        <Button
+          className="w-full mt-5"
+          onClick={() => {
+            updateEditorsContentToMongoDB(editor.document, noteId);
+            // clear local storage
+            localStorage.removeItem('editorContent');
+          }}
+        >
+          Save
+        </Button>
+      </Link>
     </div>
   );
 }

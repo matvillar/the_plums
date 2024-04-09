@@ -1,7 +1,5 @@
 'use client';
 
-// import FullCalendar from '@fullcalendar/react';
-// import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 const RightBar = () => {
   return (
     <section className="flex w-fit flex-col justify-between gap-12 overflow-auto border-l border-l-dark-4  bg-light-1 text-dark-2 px-10 pb-6 pt-28 max-xl:hidden ">

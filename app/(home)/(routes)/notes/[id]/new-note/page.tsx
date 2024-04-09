@@ -1,7 +1,4 @@
 'use client';
-import { currentUser } from '@clerk/nextjs';
-import { redirect } from 'next/navigation';
-import { fetchUserInfo } from '@/lib/actions/user.actions';
 import NewNoteForm from '@/components/forms/NewNoteForm';
 import { useParams } from 'next/navigation';
 

@@ -1,9 +1,5 @@
 'use client';
 import { UserButton, useUser } from '@clerk/nextjs';
-import { OrganizationSwitcher, SignOutButton, SignedIn } from '@clerk/nextjs';
-import Link from 'next/link';
-import Image from 'next/image';
-import { RiLogoutBoxLine } from 'react-icons/ri';
 import { toCapitalize } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import ProfileDropDownMenu from './ProfileDropDownMenu';

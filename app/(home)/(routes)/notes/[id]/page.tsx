@@ -1,5 +1,4 @@
 'use client';
-import { FolderId } from '@/components/shared/FolderId';
 import NotesDisplay from '@/components/shared/NotesDisplay';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
