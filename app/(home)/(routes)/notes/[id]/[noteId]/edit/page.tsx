@@ -2,11 +2,7 @@
 import EditorEdit from '@/components/shared/EditorEdit';
 import { useParams } from 'next/navigation';
 
-export default function EditNote({
-  folderId,
-}: {
-  folderId: string | string[] | undefined;
-}) {
+export default function EditNote() {
   const { noteId } = useParams();
 
   return (
