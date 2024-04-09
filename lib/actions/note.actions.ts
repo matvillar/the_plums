@@ -93,3 +93,15 @@ export async function deleteNoteById(noteId: string | string[]) {
     throw new Error('Error deleting note');
   }
 }
+
+// Fetches the 3 latest notes created
+export async function fetchRecentNotes() {
+  try {
+    connect();
+    const notes = await Note.find().sort({ createdAt: 'desc' }).limit(3).exec();
+    return notes;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error fetching notes');
+  }
+}
