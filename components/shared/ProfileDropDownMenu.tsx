@@ -14,6 +14,7 @@ import Image from 'next/image';
 const ProfileDropDownMenu = () => {
   const { user } = useUser();
   const router = useRouter();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -39,3 +40,5 @@ const ProfileDropDownMenu = () => {
 };
 
 export default ProfileDropDownMenu;
+
+// { userId }: { userId: string }

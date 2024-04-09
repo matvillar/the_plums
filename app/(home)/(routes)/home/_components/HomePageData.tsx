@@ -8,7 +8,7 @@ const HomePageData = async () => {
   const res = await fetchRecentFolders();
   return (
     <>
-      <div className="flex head-text items-center gap-5">
+      <div className="flex head-text items-center gap-5 mb-10">
         <h2 className="text-2xl">Recent Folders</h2>
         <Link href="/new-folder">
           <FaFolderPlus

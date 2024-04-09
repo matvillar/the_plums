@@ -1,12 +1,14 @@
-'use client';
-import { UserButton, useUser } from '@clerk/nextjs';
+import { currentUser, UserButton, useUser } from '@clerk/nextjs';
 import { toCapitalize } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import ProfileDropDownMenu from './ProfileDropDownMenu';
+import { fetchUserInfo } from '@/lib/actions/user.actions';
 
-const TopBar = () => {
-  const router = useRouter();
-  const { user } = useUser();
+const TopBar = async () => {
+  const user = await currentUser();
+  if (!user) return null;
+
+  const userInfo = await fetchUserInfo(user.id);
   const userNameCapitalized = toCapitalize(user?.firstName || '');
   return (
     <section className="flex text-center p-10">

@@ -3,6 +3,8 @@ import { fetchAllFolders } from '@/lib/actions/folder.actions';
 import { fetchUserInfo } from '@/lib/actions/user.actions';
 import { currentUser } from '@clerk/nextjs';
 import FolderDesign from '@/components/shared/FolderDesign';
+import Link from 'next/link';
+import { FaFolderPlus } from 'react-icons/fa';
 
 const Folders = async () => {
   const user = await currentUser();
@@ -14,7 +16,15 @@ const Folders = async () => {
 
   return (
     <div>
-      <h1>Folders</h1>
+      <div className="flex head-text items-center gap-5 mb-10">
+        <h2 className="text-2xl ">Folders</h2>
+        <Link href="/new-folder">
+          <FaFolderPlus
+            className="cursor-pointer hover:text-purple-800 transition ease-in-out"
+            size={28}
+          />
+        </Link>
+      </div>
       <div className="flex flex-wrap ">
         {folders.length > 0 &&
           folders.map((folder) => (

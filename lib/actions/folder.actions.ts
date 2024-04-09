@@ -3,6 +3,7 @@ import { FolderParams } from '@/constants/FolderParams';
 import { connect } from '../mongoose';
 import Folder from '../models/folder.model';
 import User from '../models/user.model';
+import Note from '../models/note.model';
 
 import { revalidatePath } from 'next/cache';
 
@@ -63,5 +64,17 @@ export async function fetchAllFolders() {
   } catch (error) {
     console.log(error);
     throw new Error('Error fetching folders');
+  }
+}
+
+export async function deleteFolderById(folderId: string) {
+  try {
+    connect();
+    await Folder.findByIdAndDelete(folderId);
+    // delete notes in the folder
+    await Note.deleteMany({ folder: folderId });
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error deleting folder');
   }
 }
