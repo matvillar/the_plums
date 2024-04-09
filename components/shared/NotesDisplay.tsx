@@ -8,7 +8,8 @@ import { useParams } from 'next/navigation';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { MdModeEdit } from 'react-icons/md';
-
+import Image from 'next/image';
+import { PlusCircleIcon } from 'lucide-react';
 const NotesDisplay = ({ folderId }: FolderId) => {
   const { id } = useParams();
 
@@ -41,10 +42,20 @@ const NotesDisplay = ({ folderId }: FolderId) => {
           ))}
         </div>
       ) : (
-        <div className="Flex flex-col">
-          <p>No notes in this folder</p>
+        <div className=" h-full flex flex-1 flex-col items-center justify-center space-y-4">
+          <Image
+            src="/assets/left-note.svg"
+            alt="Add Notes"
+            width={400}
+            height={400}
+          />
+          <h2 className="text-2xl">No notes in this folder</h2>
+
           <Link href={`/notes/${id}/new-note`}>
-            <Button> Create Note </Button>
+            <Button className="font-bold">
+              <PlusCircleIcon className="h-6 w-6 mr-2" />
+              New note
+            </Button>
           </Link>
         </div>
       )}

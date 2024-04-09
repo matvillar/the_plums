@@ -2,6 +2,7 @@ import { createNote } from '@/lib/actions/note.actions';
 import { Block, BlockNoteEditor, PartialBlock } from '@blocknote/core';
 import '@blocknote/core/fonts/inter.css';
 import { BlockNoteView } from '@blocknote/react';
+
 import '@blocknote/react/style.css';
 import { use, useEffect, useMemo, useState } from 'react';
 import { Button } from '../ui/button';
@@ -125,27 +126,3 @@ export default function Editor({
     </div>
   );
 }
-
-// const editor: BlockNoteEditor = useCreateBlockNote({
-//   initialContent: [
-// {
-//   type: 'paragraph',
-//   content: 'Welcome to this demo!',
-// },
-// {
-//   type: 'paragraph',
-//   content: 'Upload an image using the button below',
-// },
-// {
-//   type: 'image',
-// },
-//   ],
-//   uploadFile,
-// });
-
-// async function getEditorsContentFromMongoDB(
-//   folderId: string | string[] | undefined
-// ) {
-//   const content = await getNotesByFolderId(folderId);
-//   return content ? (JSON.parse(content) as PartialBlock[]) : undefined;
-// }

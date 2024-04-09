@@ -14,6 +14,7 @@ import { FaPlusCircle } from 'react-icons/fa';
 import { IoHomeSharp } from 'react-icons/io5';
 import { FaSearch } from 'react-icons/fa';
 import { FaFolderOpen } from 'react-icons/fa6';
+import { FaUser } from 'react-icons/fa';
 
 import Item from './Item';
 
@@ -37,8 +38,8 @@ const LeftBar = () => {
             </Link>
           </div>
           <div className="mt-4">
-            <Link href="/home">
-              <Item onClick={() => {}} label="Search" icon={FaSearch} />
+            <Link href="/profile">
+              <Item onClick={() => {}} label="Profile" icon={FaUser} />
             </Link>
           </div>
           <div className="mt-4">
@@ -47,7 +48,6 @@ const LeftBar = () => {
             </Link>
           </div>
         </div>
-        {/* <div className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0" /> */}
 
         <div className="mt-10 px-6 py-6">
           <SignedIn>

@@ -17,7 +17,7 @@ import { Input } from '@/components/ui/input';
 import { z } from 'zod';
 import Image from 'next/image';
 import { Textarea } from '@/components/ui/textarea';
-
+import { isBase64Image } from '@/lib/utils';
 import { useState } from 'react';
 import { useUploadThing } from '@/lib/uploadthing';
 import { updateUser } from '@/lib/actions/user.actions';
@@ -30,7 +30,7 @@ interface UProps {
 
 function CreateFolderForm({ userId }: UProps) {
   const [files, setFiles] = useState<File[]>([]);
-
+  const { startUpload } = useUploadThing('media');
   const router = useRouter();
   const pathname = usePathname();
 
@@ -45,6 +45,17 @@ function CreateFolderForm({ userId }: UProps) {
   });
 
   const onSubmit = async (values: z.infer<typeof FolderValidation>) => {
+    const imgValue = values.folderImage;
+
+    const hasImageChanged = isBase64Image(imgValue);
+    if (hasImageChanged) {
+      const res = await startUpload(files);
+      if (res && res[0].url) {
+        values.folderImage = res[0].url;
+      }
+    } else {
+      values.folderImage = imgValue;
+    }
     await createFolder({
       folderTitle: values.folderTitle,
       folderImage: values.folderImage,
@@ -106,8 +117,8 @@ function CreateFolderForm({ userId }: UProps) {
                     />
                   ) : (
                     <Image
-                      src="/assets/profile.svg"
-                      alt="Folder Image"
+                      src="/assets/upload.jpg"
+                      alt="Upload"
                       layout="fill"
                       objectFit="cover"
                       priority
@@ -164,7 +175,10 @@ function CreateFolderForm({ userId }: UProps) {
             )}
           />
 
-          <Button type="submit" className="bg-primary-500">
+          <Button
+            type="submit"
+            className="bg-black hover:bg-purple-800 transition duration-300 text-white font-bold py-2 px-4 rounded"
+          >
             Create Folder
           </Button>
         </form>
