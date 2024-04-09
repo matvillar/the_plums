@@ -6,10 +6,18 @@ import { toCapitalize } from '@/lib/utils';
 import Link from 'next/link';
 import { fetchRecentFolders } from '@/lib/actions/folder.actions';
 import HomePageData from './_components/HomePageData';
+import { fetchUserInfo } from '@/lib/actions/user.actions';
+import { redirect } from 'next/navigation';
 
 export default async function HomePage() {
   const user = await currentUser();
   if (!user) return null;
+
+  const userInfo = await fetchUserInfo(user.id);
+  if (!userInfo?.isOnboard) {
+    redirect('/get-onboard');
+  }
+
   const userNameCapitalized = toCapitalize(user?.firstName || '');
   const res = await fetchRecentFolders();
 
